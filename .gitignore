@@ -39,8 +39,6 @@ logs/
 
 # --- Ambiente de Desenvolvimento ---
 .env
-*.properties
-*.yml (exceto application.yml, se necessário)
 application.yml
 
 # --- Banco de Dados/Sistemas Externos ---
