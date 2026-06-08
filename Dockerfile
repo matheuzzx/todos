@@ -2,7 +2,9 @@ FROM maven:3.9.12-eclipse-temurin-21-alpine AS build
 
 WORKDIR /app
 
-COPY pom.xml ./
+COPY pom.xml .
+
+RUN mvn dependency:go-offline
 
 COPY src ./src
 
@@ -12,13 +14,9 @@ FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-ARG JAR_FILE=target/*.jar
-
-COPY --from=build /app/${JAR_FILE} app.jar
+COPY --from=build /app/target/*.jar app.jar
 
 RUN adduser -D todouser
-
-RUN chown todouser:todouser /app
 
 USER todouser
 
